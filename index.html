@@ -5,10 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
-    <title>Weather Forecast App</title>
+    <title>WeatherWhiz</title>
 </head>
 <body>
-    
+    <div>
+        <h1>WeatherWhiz</h1>
+    </div>
+    <div id="formContainer">
+        <form id="locationForm">
+            <label for="location-input" id="formLabel">Enter a location:</label>
+            <input type="text" id="locationInput" required placeholder="city,state">
+            <button type="submit" id="btn">Get Weather</button>
+        </form>
+        <div id="message"></div> 
+        <div id="weatherContainer">
+            <h3>Weather Information</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Temperature</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="weatherTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./app.js"></script>
 </body>
-<script src="./app.js"></script>
 </html>
