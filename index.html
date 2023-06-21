@@ -8,30 +8,37 @@
     <title>WeatherWhiz</title>
 </head>
 <body>
+<div id="pageContainer">
     <div>
-        <h1>WeatherWhiz</h1>
+        <h1 id="mainHeader">WeatherWhiz</h1>
     </div>
     <div id="formContainer">
         <form id="locationForm">
             <label for="location-input" id="formLabel">Enter a location:</label>
-            <input type="text" id="locationInput" required placeholder="city,state">
+            <input type="text" id="locationInput" required placeholder="City, State">
             <button type="submit" id="btn">Get Weather</button>
         </form>
         <div id="message"></div> 
         <div id="weatherContainer">
-            <h3>Weather Information</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Temperature</th>
-                        <th>Description</th>
+                        <th id="weatherTemp">Temperature</th>
+                        <th id="weatherDesc">Description</th>
                     </tr>
                 </thead>
                 <tbody id="weatherTableBody">
                 </tbody>
             </table>
         </div>
+        <div id="savedAreaContainer">
+            <button type="submit" id="saveAreaBtn"> Save This Area</button>
+            <h3>Saved Areas</h3>
+            <ul id="savedAreaList">
+            </ul>
+        </div>
     </div>
-    <script src="./app.js"></script>
+</div>
+<script src="./app.js"></script>
 </body>
 </html>
