@@ -107,51 +107,42 @@ function getForecast(lat, lon, city, state) {
 
             const cityName = dataObj.name;
 
-            if (!cityHeadings[cityName]) {
-                const heading = document.createElement('h1');
-                heading.textContent = `Current Weather In ${cityName}`;
-                weatherContainer.insertBefore(heading, weatherContainer.firstChild);
-                cityHeadings[cityName] = true; // Mark heading as created for the city
+            const currentCityHeading = document.getElementById('currentCityHeading');
+            currentCityHeading.textContent = `Current Weather In ${cityName}`;
+
+            const row = document.createElement('tr');
+            const temperatureCell = document.createElement('td');
+            const descriptionCell = document.createElement('td');
+
+            temperatureCell.textContent = `${temperature} °F`;
+            descriptionCell.textContent = weatherDescription;
+
+            row.appendChild(temperatureCell);
+            row.appendChild(descriptionCell);
+
+            weatherTableBody.appendChild(row);
+
+            weatherContainer.style.display = 'block';
+            saveAreaBtn.style.display = 'block';
+
+            if (selectedAreas.alreadySavedArea(city, state)) {
+                selectedAreas.updateLastChecked(
+                    city,
+                    state,
+                    new Date().toLocaleString()
+                );
+                updateSavedAreaList();
             }
-
-        const row = document.createElement('tr');
-        const temperatureCell = document.createElement('td');
-        const descriptionCell = document.createElement('td');
-
-        temperatureCell.textContent = `${temperature} °F`;
-        descriptionCell.textContent = weatherDescription;
-
-        row.appendChild(temperatureCell);
-        row.appendChild(descriptionCell);
-
-        weatherTableBody.appendChild(row);
-
-        weatherContainer.style.display = 'block';
-        saveAreaBtn.style.display = 'block';
-
-        const mainHeader = document.getElementById('mainHeader');
-        const locationForm = document.getElementById('locationForm');
-
-        mainHeader.style.display = 'none';
-        locationForm.style.display = 'none';
-
-        if (selectedAreas.alreadySavedArea(city, state)) {
-            selectedAreas.updateLastChecked(
-                city,
-                state,
-                new Date().toLocaleString()
-            );
-            updateSavedAreaList();
-        }
         } else {
             messageDiv.textContent = 'No forecast data available for this location.';
             saveAreaBtn.style.display = 'none';
         }
     })
-        .catch((error) => {
+    .catch((error) => {
         messageDiv.textContent = 'Error fetching forecast data: ' + error;
     });
 }
+
 
 function updateSavedAreaList() {
     savedAreaList.innerHTML = '';
