@@ -18,7 +18,7 @@ class SelectedAreas {
         const area = {
         city,
         state,
-        lastChecked: new Date().toLocaleString(), // Store current date and time
+        lastChecked: new Date().toLocaleString(),
         };
         this.areas.push(area);
     }
@@ -82,7 +82,7 @@ function getWeather(city, state) {
         .then((dataObj) => {
             if (dataObj.length > 0) {
             const { lat, lon } = dataObj[0];
-            getForecast(lat, lon, city, state); // Pass city and state to getForecast
+            getForecast(lat, lon, city, state);
         } else {
             messageDiv.textContent = 'Location not found.';
         }
@@ -149,15 +149,22 @@ function updateSavedAreaList() {
 
     selectedAreas.getAreas().forEach((area) => {
         const listItemWrapper = document.createElement('div');
-        listItemWrapper.className = 'saved-area-item'; // Updated class name
+        listItemWrapper.className = 'saved-area-item'; 
+
+        const cityNameDiv = document.createElement('div');
+        cityNameDiv.textContent = `${area.city}, ${area.state}`;
+        
+        const lastCheckedDiv = document.createElement('div');
+        lastCheckedDiv.textContent = `Last Checked: ${area.lastChecked}`;
 
         const savedAreaListItem = document.createElement('li');
-        savedAreaListItem.textContent = `${area.city}, ${area.state} - Last Checked: ${area.lastChecked}`;
+        savedAreaListItem.appendChild(cityNameDiv);
+        savedAreaListItem.appendChild(lastCheckedDiv);
 
         listItemWrapper.appendChild(savedAreaListItem);
 
         const buttonWrapper = document.createElement('div');
-        buttonWrapper.className = 'button-container'; // Updated class name
+        buttonWrapper.className = 'button-container';
 
         const refetchWeatherButton = document.createElement('button');
         refetchWeatherButton.className = 'btn';
@@ -180,5 +187,6 @@ function updateSavedAreaList() {
         savedAreaList.appendChild(listItemWrapper);
     });
 }
+
 
 updateSavedAreaList();
